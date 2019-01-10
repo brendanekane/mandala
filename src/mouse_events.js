@@ -16,12 +16,12 @@ class MouseEvents {
     this.canvas.addEventListener("mousedown", (e) => {
       this.board.findxy("down", e);
     });
-    this.canvas.addEventListener("touchstart", (e) => {
-      if (e.target == canvas) {
-        e.preventDefault();
-      }
-      this.board.findxy("down", e);
-    });
+    // this.canvas.addEventListener("touchstart", (e) => {
+    //   if (e.target == canvas) {
+    //     e.preventDefault();
+    //   }
+    //   this.board.findxy("down", e);
+    // });
   }
 
   // touchDown(e) {
@@ -34,12 +34,12 @@ class MouseEvents {
     this.canvas.addEventListener("mousemove", (e) => {
       this.board.findxy("move", e);
     });
-    this.canvas.addEventListener("touchmove", (e) => {
-      if (e.target == canvas) {
-        e.preventDefault();
-      }
-      this.board.findxy("move", e);
-    });
+    // this.canvas.addEventListener("touchmove", (e) => {
+    //   if (e.target == canvas) {
+    //     e.preventDefault();
+    //   }
+    //   this.board.findxy("move", e);
+    // });
   }
 
   mouseUp(e) {
@@ -49,18 +49,18 @@ class MouseEvents {
     this.canvas.addEventListener("mouseout", (e) => {
       this.board.findxy("out", e);
     });
-    this.canvas.addEventListener("touchend", (e) => {
-      if (e.target == canvas) {
-        e.preventDefault();
-      }
-      this.board.findxy("up", e);
-    });
-    this.canvas.addEventListener("touchcancel", (e) => {
-      if (e.target == canvas) {
-        e.preventDefault();
-      }
-      this.board.findxy("out", e);
-    });
+    // this.canvas.addEventListener("touchend", (e) => {
+    //   if (e.target == canvas) {
+    //     e.preventDefault();
+    //   }
+    //   this.board.findxy("up", e);
+    // });
+    // this.canvas.addEventListener("touchcancel", (e) => {
+    //   if (e.target == canvas) {
+    //     e.preventDefault();
+    //   }
+    //   this.board.findxy("out", e);
+    // });
   }
 
 }

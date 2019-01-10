@@ -10,6 +10,31 @@ document.addEventListener("DOMContentLoaded", () => {
   const board = new DrawingBoard(ctx);
   const mouse = new MouseEvents(board);
 
+
+  canvas.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    board.findxy("down", e);
+  });
+
+  canvas.addEventListener("touchmove", (e) => {
+    e.preventDefault();
+    board.findxy("move", e);
+  });
+
+  canvas.addEventListener("touchend", (e) => {
+    e.preventDefault();
+    board.findxy("up", e);
+  });
+
+  canvas.addEventListener("touchcancel", (e) => {
+    e.preventDefault();
+    board.findxy("out", e);
+  });
+
+
+
+
+
   const init = () => {
 
     ctx.clearRect(0,0, canvas.width, canvas.height);
@@ -26,6 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   init();
+
 
 
   const clearBtn = document.querySelector("#clear-button");
