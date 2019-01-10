@@ -1,0 +1,15 @@
+.mandala-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header {
+  color: white;
+  font-size: 50px;
+  font-family: "Lucida Console", Monaco, monospace;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  weight: bold;
+  display: flex;
+  justify-content: center;
+}
