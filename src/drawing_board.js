@@ -86,6 +86,26 @@ class DrawingBoard {
             this.draw();
         }
     }
+    if (res == 'touchdown') {
+      this.prevX = this.currX;
+      this.prevY = this.currY;
+      this.currX = e.touches[0].clientX - this.ctx.canvas.offsetLeft;
+      this.currY = e.touches[0].clientY - this.ctx.canvas.offsetTop;
+
+      this.isDrawing = true;
+    }
+    if (res == 'touchend' || res == "touchcan") {
+        this.isDrawing = false;
+    }
+    if (res == 'touchmove') {
+        if (this.isDrawing) {
+            this.prevX = this.currX;
+            this.prevY = this.currY;
+            this.currX = e.touches[0].clientX - this.ctx.canvas.offsetLeft;
+            this.currY = e.touches[0].clientY - this.ctx.canvas.offsetTop;
+            this.draw();
+        }
+    }
   }
 
 }

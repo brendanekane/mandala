@@ -16,30 +16,26 @@ class MouseEvents {
     this.canvas.addEventListener("mousedown", (e) => {
       this.board.findxy("down", e);
     });
-    // this.canvas.addEventListener("touchstart", (e) => {
-    //   if (e.target == canvas) {
-    //     e.preventDefault();
-    //   }
-    //   this.board.findxy("down", e);
-    // });
   }
 
-  // touchDown(e) {
-  //   this.canvas.addEventListener("touchstart", (e) => {
-  //     this.board.findxy("down", e);
-  //   });
-  // }
+  touchDown(e) {
+    this.canvas.addEventListener("touchstart", (e) => {
+      e.preventDefault();
+      this.board.findxy("touchdown", e);
+    });
+  }
 
   mouseMove(e) {
     this.canvas.addEventListener("mousemove", (e) => {
       this.board.findxy("move", e);
     });
-    // this.canvas.addEventListener("touchmove", (e) => {
-    //   if (e.target == canvas) {
-    //     e.preventDefault();
-    //   }
-    //   this.board.findxy("move", e);
-    // });
+  }
+
+  touchMove(e) {
+    this.canvas.addEventListener("touchmove", (e) => {
+      e.preventDefault();
+      this.board.findxy("touchmove", e);
+    });
   }
 
   mouseUp(e) {
@@ -49,18 +45,21 @@ class MouseEvents {
     this.canvas.addEventListener("mouseout", (e) => {
       this.board.findxy("out", e);
     });
-    // this.canvas.addEventListener("touchend", (e) => {
-    //   if (e.target == canvas) {
-    //     e.preventDefault();
-    //   }
-    //   this.board.findxy("up", e);
-    // });
-    // this.canvas.addEventListener("touchcancel", (e) => {
-    //   if (e.target == canvas) {
-    //     e.preventDefault();
-    //   }
-    //   this.board.findxy("out", e);
-    // });
+  }
+  touchUp(e){
+    this.canvas.addEventListener("touchend", (e) => {
+      if (e.target == canvas) {
+        e.preventDefault();
+      }
+      this.board.findxy("touchend", e);
+    });
+    this.canvas.addEventListener("touchcancel", (e) => {
+      if (e.target == canvas) {
+        e.preventDefault();
+      }
+      this.board.findxy("touchcan", e);
+    });
+
   }
 
 }
