@@ -13,21 +13,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
   canvas.addEventListener("touchstart", (e) => {
     e.preventDefault();
+    alert("touch event");
     board.findxy("down", e);
   });
 
   canvas.addEventListener("touchmove", (e) => {
     e.preventDefault();
+    alert("touch event");
     board.findxy("move", e);
   });
 
   canvas.addEventListener("touchend", (e) => {
     e.preventDefault();
+    alert("touch event");
     board.findxy("up", e);
   });
 
   canvas.addEventListener("touchcancel", (e) => {
     e.preventDefault();
+    alert("touch event");
     board.findxy("out", e);
   });
 
