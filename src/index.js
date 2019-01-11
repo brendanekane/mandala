@@ -52,6 +52,9 @@ document.addEventListener("DOMContentLoaded", () => {
     mouse.mouseDown();
     mouse.mouseMove();
     mouse.mouseUp();
+    mouse.touchDown();
+    mouse.touchMove();
+    mouse.touchUp();
   };
 
   init();
