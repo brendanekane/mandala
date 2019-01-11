@@ -372,7 +372,6 @@ function () {
 
       this.canvas.addEventListener("touchstart", function (e) {
         e.preventDefault();
-        alert("touch event");
 
         _this2.board.findxy("touchdown", e);
       });
@@ -393,7 +392,6 @@ function () {
 
       this.canvas.addEventListener("touchmove", function (e) {
         e.preventDefault();
-        alert("touch event");
 
         _this4.board.findxy("touchmove", e);
       });
@@ -417,13 +415,11 @@ function () {
 
       this.canvas.addEventListener("touchend", function (e) {
         e.preventDefault();
-        alert("touch event");
 
         _this6.board.findxy("touchend", e);
       });
       this.canvas.addEventListener("touchcancel", function (e) {
         e.preventDefault();
-        alert("touch event");
 
         _this6.board.findxy("touchcan", e);
       });
