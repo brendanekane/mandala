@@ -193,11 +193,13 @@ function () {
   }, {
     key: "findxy",
     value: function findxy(res, e) {
+      var view = this.ctx.canvas.getBoundingClientRect();
+
       if (res == 'down') {
         this.prevX = this.currX;
         this.prevY = this.currY;
-        this.currX = e.clientX - this.ctx.canvas.offsetLeft;
-        this.currY = e.clientY - this.ctx.canvas.offsetTop;
+        this.currX = e.clientX - view.left;
+        this.currY = e.clientY - view.top;
         this.isDrawing = true;
       }
 
@@ -209,8 +211,8 @@ function () {
         if (this.isDrawing) {
           this.prevX = this.currX;
           this.prevY = this.currY;
-          this.currX = e.clientX - this.ctx.canvas.offsetLeft;
-          this.currY = e.clientY - this.ctx.canvas.offsetTop;
+          this.currX = e.clientX - view.left;
+          this.currY = e.clientY - view.top;
           this.draw();
         }
       }
@@ -218,8 +220,8 @@ function () {
       if (res == 'touchdown') {
         this.prevX = this.currX;
         this.prevY = this.currY;
-        this.currX = e.touches[0].clientX - this.ctx.canvas.offsetLeft;
-        this.currY = e.touches[0].clientY - this.ctx.canvas.offsetTop;
+        this.currX = e.touches[0].clientX - view.left;
+        this.currY = e.touches[0].clientY - view.top;
         this.isDrawing = true;
       }
 
@@ -231,8 +233,8 @@ function () {
         if (this.isDrawing) {
           this.prevX = this.currX;
           this.prevY = this.currY;
-          this.currX = e.touches[0].clientX - this.ctx.canvas.offsetLeft;
-          this.currY = e.touches[0].clientY - this.ctx.canvas.offsetTop;
+          this.currX = e.touches[0].clientX - view.left;
+          this.currY = e.touches[0].clientY - view.top;
           this.draw();
         }
       }
@@ -275,12 +277,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ctx.arc(board.center.x, board.center.y, board.radius, 0, Math.PI * 2, true);
     ctx.stroke();
     ctx.closePath();
-    mouse.mouseDown();
-    mouse.mouseMove();
-    mouse.mouseUp();
-    mouse.touchDown();
-    mouse.touchMove();
-    mouse.touchUp();
+    mouse.mouseTrigger();
   };
 
   init();
@@ -401,6 +398,16 @@ function () {
 
         _this6.board.findxy("touchcan", e);
       });
+    }
+  }, {
+    key: "mouseTrigger",
+    value: function mouseTrigger(e) {
+      this.mouseDown(e);
+      this.mouseMove(e);
+      this.mouseUp(e);
+      this.touchDown(e);
+      this.touchMove(e);
+      this.touchUp(e);
     }
   }]);
 

@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const init = () => {
 
+
     ctx.clearRect(0,0, canvas.width, canvas.height);
     ctx.fillStyle = 'black';
     ctx.fillRect(0,0,canvas.width,canvas.height);
@@ -20,12 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ctx.arc(board.center.x, board.center.y, board.radius, 0, Math.PI * 2, true);
     ctx.stroke();
     ctx.closePath();
-    mouse.mouseDown();
-    mouse.mouseMove();
-    mouse.mouseUp();
-    mouse.touchDown();
-    mouse.touchMove();
-    mouse.touchUp();
+    mouse.mouseTrigger();
   };
 
   init();

@@ -55,7 +55,15 @@ class MouseEvents {
       e.preventDefault();
       this.board.findxy("touchcan", e);
     });
+  }
 
+  mouseTrigger(e){
+    this.mouseDown(e);
+    this.mouseMove(e);
+    this.mouseUp(e);
+    this.touchDown(e);
+    this.touchMove(e);
+    this.touchUp(e);
   }
 
 }

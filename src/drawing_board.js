@@ -66,11 +66,12 @@ class DrawingBoard {
   }
 
   findxy(res, e) {
+    const view = this.ctx.canvas.getBoundingClientRect();
     if (res == 'down') {
         this.prevX = this.currX;
         this.prevY = this.currY;
-        this.currX = e.clientX - this.ctx.canvas.offsetLeft;
-        this.currY = e.clientY - this.ctx.canvas.offsetTop;
+        this.currX = e.clientX - view.left;
+        this.currY = e.clientY - view.top;
 
         this.isDrawing = true;
     }
@@ -81,16 +82,16 @@ class DrawingBoard {
         if (this.isDrawing) {
             this.prevX = this.currX;
             this.prevY = this.currY;
-            this.currX = e.clientX - this.ctx.canvas.offsetLeft;
-            this.currY = e.clientY - this.ctx.canvas.offsetTop;
+            this.currX = e.clientX - view.left;
+            this.currY = e.clientY - view.top;
             this.draw();
         }
     }
     if (res == 'touchdown') {
       this.prevX = this.currX;
       this.prevY = this.currY;
-      this.currX = e.touches[0].clientX - this.ctx.canvas.offsetLeft;
-      this.currY = e.touches[0].clientY - this.ctx.canvas.offsetTop;
+      this.currX = e.touches[0].clientX - view.left;
+      this.currY = e.touches[0].clientY - view.top;
 
       this.isDrawing = true;
     }
@@ -101,8 +102,8 @@ class DrawingBoard {
         if (this.isDrawing) {
             this.prevX = this.currX;
             this.prevY = this.currY;
-            this.currX = e.touches[0].clientX - this.ctx.canvas.offsetLeft;
-            this.currY = e.touches[0].clientY - this.ctx.canvas.offsetTop;
+            this.currX = e.touches[0].clientX - view.left;
+            this.currY = e.touches[0].clientY - view.top;
             this.draw();
         }
     }
