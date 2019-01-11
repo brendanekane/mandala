@@ -264,29 +264,7 @@ document.addEventListener("DOMContentLoaded", function () {
   canvas.style.border = "solid black";
   var ctx = canvas.getContext("2d");
   var board = new DrawingBoard(ctx);
-  var mouse = new MouseEvents(board); // canvas.addEventListener("touchstart", (e) => {
-  //   e.preventDefault();
-  //   alert("touch event");
-  //   board.findxy("touchdown", e);
-  // });
-  //
-  // canvas.addEventListener("touchmove", (e) => {
-  //   e.preventDefault();
-  //   alert("touch event");
-  //   board.findxy("touchmove", e);
-  // });
-  //
-  // canvas.addEventListener("touchend", (e) => {
-  //   e.preventDefault();
-  //   alert("touch event");
-  //   board.findxy("touchend", e);
-  // });
-  //
-  // canvas.addEventListener("touchcancel", (e) => {
-  //   e.preventDefault();
-  //   alert("touch event");
-  //   board.findxy("touchcan", e);
-  // });
+  var mouse = new MouseEvents(board);
 
   var init = function init() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -311,11 +289,11 @@ document.addEventListener("DOMContentLoaded", function () {
     init();
     console.log("cleared");
   });
-  var colorMenu = document.querySelector(".line-color");
+  var colorMenu = document.querySelector(".line-color-dropdown");
   colorMenu.addEventListener("change", function (e) {
     board.color = e.target.value;
   });
-  var weightMenu = document.querySelector(".line-weight");
+  var weightMenu = document.querySelector(".line-weight-dropdown");
   weightMenu.addEventListener("change", function (e) {
     board.weight = e.target.value;
   });

@@ -10,35 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const board = new DrawingBoard(ctx);
   const mouse = new MouseEvents(board);
 
-
-  // canvas.addEventListener("touchstart", (e) => {
-  //   e.preventDefault();
-  //   alert("touch event");
-  //   board.findxy("touchdown", e);
-  // });
-  //
-  // canvas.addEventListener("touchmove", (e) => {
-  //   e.preventDefault();
-  //   alert("touch event");
-  //   board.findxy("touchmove", e);
-  // });
-  //
-  // canvas.addEventListener("touchend", (e) => {
-  //   e.preventDefault();
-  //   alert("touch event");
-  //   board.findxy("touchend", e);
-  // });
-  //
-  // canvas.addEventListener("touchcancel", (e) => {
-  //   e.preventDefault();
-  //   alert("touch event");
-  //   board.findxy("touchcan", e);
-  // });
-
-
-
-
-
   const init = () => {
 
     ctx.clearRect(0,0, canvas.width, canvas.height);
@@ -67,12 +38,12 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("cleared");
   });
 
-  const colorMenu = document.querySelector(".line-color");
+  const colorMenu = document.querySelector(".line-color-dropdown");
   colorMenu.addEventListener("change", (e) =>{
     board.color = e.target.value;
   });
 
-  const weightMenu = document.querySelector(".line-weight");
+  const weightMenu = document.querySelector(".line-weight-dropdown");
   weightMenu.addEventListener("change", (e) => {
     board.weight = e.target.value;
   });
