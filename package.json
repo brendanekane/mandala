@@ -1,12 +1,15 @@
 {
   "name": "Mandala",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A simple application to create a mandala drawing using canvas and vanilla javascript.",
+  "main": "webpack.config.js",
+  "directories": {
+    "doc": "docs"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "webpack": "webpack --mode=development --watch",
-    "start": "node src/index.js",
+    "start": "node src/index.js"
   },
   "repository": {
     "type": "git",
@@ -23,7 +26,7 @@
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.2.3",
     "babel-loader": "^8.0.5",
-    "webpack": "^4.28.1",
+    "webpack": "^4.28.4",
     "webpack-cli": "^3.2.1"
   }
 }

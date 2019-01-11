@@ -214,6 +214,28 @@ function () {
           this.draw();
         }
       }
+
+      if (res == 'touchdown') {
+        this.prevX = this.currX;
+        this.prevY = this.currY;
+        this.currX = e.touches[0].clientX - this.ctx.canvas.offsetLeft;
+        this.currY = e.touches[0].clientY - this.ctx.canvas.offsetTop;
+        this.isDrawing = true;
+      }
+
+      if (res == 'touchend' || res == "touchcan") {
+        this.isDrawing = false;
+      }
+
+      if (res == 'touchmove') {
+        if (this.isDrawing) {
+          this.prevX = this.currX;
+          this.prevY = this.currY;
+          this.currX = e.touches[0].clientX - this.ctx.canvas.offsetLeft;
+          this.currY = e.touches[0].clientY - this.ctx.canvas.offsetTop;
+          this.draw();
+        }
+      }
     }
   }]);
 
@@ -242,7 +264,29 @@ document.addEventListener("DOMContentLoaded", function () {
   canvas.style.border = "solid black";
   var ctx = canvas.getContext("2d");
   var board = new DrawingBoard(ctx);
-  var mouse = new MouseEvents(board);
+  var mouse = new MouseEvents(board); // canvas.addEventListener("touchstart", (e) => {
+  //   e.preventDefault();
+  //   alert("touch event");
+  //   board.findxy("touchdown", e);
+  // });
+  //
+  // canvas.addEventListener("touchmove", (e) => {
+  //   e.preventDefault();
+  //   alert("touch event");
+  //   board.findxy("touchmove", e);
+  // });
+  //
+  // canvas.addEventListener("touchend", (e) => {
+  //   e.preventDefault();
+  //   alert("touch event");
+  //   board.findxy("touchend", e);
+  // });
+  //
+  // canvas.addEventListener("touchcancel", (e) => {
+  //   e.preventDefault();
+  //   alert("touch event");
+  //   board.findxy("touchcan", e);
+  // });
 
   var init = function init() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -319,24 +363,66 @@ function () {
       });
     }
   }, {
-    key: "mouseMove",
-    value: function mouseMove(e) {
+    key: "touchDown",
+    value: function touchDown(e) {
       var _this2 = this;
 
+      this.canvas.addEventListener("touchstart", function (e) {
+        e.preventDefault();
+
+        _this2.board.findxy("touchdown", e);
+      });
+    }
+  }, {
+    key: "mouseMove",
+    value: function mouseMove(e) {
+      var _this3 = this;
+
       this.canvas.addEventListener("mousemove", function (e) {
-        _this2.board.findxy("move", e);
+        _this3.board.findxy("move", e);
+      });
+    }
+  }, {
+    key: "touchMove",
+    value: function touchMove(e) {
+      var _this4 = this;
+
+      this.canvas.addEventListener("touchmove", function (e) {
+        e.preventDefault();
+
+        _this4.board.findxy("touchmove", e);
       });
     }
   }, {
     key: "mouseUp",
     value: function mouseUp(e) {
-      var _this3 = this;
+      var _this5 = this;
 
       this.canvas.addEventListener("mouseup", function (e) {
-        _this3.board.findxy("up", e);
+        _this5.board.findxy("up", e);
       });
       this.canvas.addEventListener("mouseout", function (e) {
-        _this3.board.findxy("out", e);
+        _this5.board.findxy("out", e);
+      });
+    }
+  }, {
+    key: "touchUp",
+    value: function touchUp(e) {
+      var _this6 = this;
+
+      this.canvas.addEventListener("touchend", function (e) {
+        if (e.target == canvas) {
+          e.preventDefault();
+        }
+
+        _this6.board.findxy("touchend", e);
+      });
+      this.canvas.addEventListener("touchcancel", function (e) {
+        if (e.target == canvas) {
+          e.preventDefault();
+        }
+
+        _this6.board.findxy("touchcan", e);
       });
     }
   }]);
