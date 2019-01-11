@@ -346,7 +346,9 @@ function () {
       var _this2 = this;
 
       this.canvas.addEventListener("touchstart", function (e) {
-        e.preventDefault();
+        if (e.touches.length === 1) {
+          e.preventDefault();
+        }
 
         _this2.board.findxy("touchdown", e);
       });
@@ -366,7 +368,9 @@ function () {
       var _this4 = this;
 
       this.canvas.addEventListener("touchmove", function (e) {
-        e.preventDefault();
+        if (e.touches.length === 1) {
+          e.preventDefault();
+        }
 
         _this4.board.findxy("touchmove", e);
       });
@@ -389,12 +393,16 @@ function () {
       var _this6 = this;
 
       this.canvas.addEventListener("touchend", function (e) {
-        e.preventDefault();
+        if (e.touches.length === 1) {
+          e.preventDefault();
+        }
 
         _this6.board.findxy("touchend", e);
       });
       this.canvas.addEventListener("touchcancel", function (e) {
-        e.preventDefault();
+        if (e.touches.length === 1) {
+          e.preventDefault();
+        }
 
         _this6.board.findxy("touchcan", e);
       });

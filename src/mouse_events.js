@@ -20,7 +20,9 @@ class MouseEvents {
 
   touchDown(e) {
     this.canvas.addEventListener("touchstart", (e) => {
-      e.preventDefault();
+      if (e.touches.length === 1) {
+        e.preventDefault();
+      }
       this.board.findxy("touchdown", e);
     });
   }
@@ -33,7 +35,9 @@ class MouseEvents {
 
   touchMove(e) {
     this.canvas.addEventListener("touchmove", (e) => {
-      e.preventDefault();
+      if (e.touches.length === 1) {
+        e.preventDefault();
+      }
       this.board.findxy("touchmove", e);
     });
   }
@@ -48,11 +52,15 @@ class MouseEvents {
   }
   touchUp(e){
     this.canvas.addEventListener("touchend", (e) => {
-      e.preventDefault();
+      if (e.touches.length === 1) {
+        e.preventDefault();
+      }
       this.board.findxy("touchend", e);
     });
     this.canvas.addEventListener("touchcancel", (e) => {
-      e.preventDefault();
+      if (e.touches.length === 1) {
+        e.preventDefault();
+      }
       this.board.findxy("touchcan", e);
     });
   }
