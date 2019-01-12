@@ -13,6 +13,7 @@ class DrawingBoard {
     this.center = {x:ctx.canvas.width/2, y:ctx.canvas.height/2};
     this.color = "white";
     this.weight = 1;
+    this.stack = [];
   }
 
   radConverter(degree) {

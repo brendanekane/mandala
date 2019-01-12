@@ -121,6 +121,7 @@ function () {
     };
     this.color = "white";
     this.weight = 1;
+    this.stack = [];
   }
 
   _createClass(DrawingBoard, [{
@@ -282,9 +283,44 @@ document.addEventListener("DOMContentLoaded", function () {
 
   init();
   var clearBtn = document.querySelector("#clear-button");
+  var saveBtn = document.querySelector("#save-button");
+  var restoreBtn = document.querySelector("#restore-button");
   clearBtn.addEventListener("click", function (e) {
     init();
-    console.log("cleared");
+  });
+  saveBtn.addEventListener("click", function (e) {
+    var canvasState = canvas.toDataURL(),
+        data = {
+      mandala: canvasState
+    },
+        string = JSON.stringify(data),
+        file = new Blob([string], {
+      type: 'application/json'
+    });
+    board.stack.push(file); // debugger;
+  });
+  restoreBtn.addEventListener("click", function (e) {
+    var reader = new FileReader();
+    var oldState = board.stack[board.stack.length - 2];
+    if (oldState === undefined) return;
+
+    if (board.stack[0]) {
+      board.stack.pop();
+      reader.readAsText(oldState);
+
+      reader.onload = function () {
+        var data = JSON.parse(reader.result),
+            mandala = new Image();
+        mandala.src = data.mandala;
+
+        mandala.onload = function () {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(mandala, 0, 0);
+        };
+      };
+    }
+
+    if (board.stack.length === 0) board.stack.push(oldState);
   });
   var colorMenu = document.querySelector(".line-color-dropdown");
   colorMenu.addEventListener("change", function (e) {

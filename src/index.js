@@ -29,9 +29,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   const clearBtn = document.querySelector("#clear-button");
+  const saveBtn = document.querySelector("#save-button");
+  const restoreBtn = document.querySelector("#restore-button");
   clearBtn.addEventListener("click", (e) => {
     init();
-    console.log("cleared");
+  });
+  saveBtn.addEventListener("click", (e) => {
+    const canvasState = canvas.toDataURL(),
+          data = {mandala: canvasState},
+          string = JSON.stringify(data),
+          file = new Blob([string], {
+            type: 'application/json'
+          });
+    board.stack.push(file);
+    // debugger;
+  });
+  restoreBtn.addEventListener("click", (e) => {
+    const reader = new FileReader();
+    const oldState = board.stack[board.stack.length - 2];
+    if (oldState === undefined) return;
+    if (board.stack[0]) {
+      board.stack.pop();
+      reader.readAsText(oldState);
+      reader.onload = () => {
+        const data = JSON.parse(reader.result),
+              mandala = new Image();
+              mandala.src = data.mandala;
+              mandala.onload = () => {
+                ctx.clearRect(0,0, canvas.width, canvas.height);
+                ctx.drawImage(mandala, 0, 0);
+              };
+      };
+    }
+    if (board.stack.length === 0) board.stack.push(oldState);
+
   });
 
   const colorMenu = document.querySelector(".line-color-dropdown");
