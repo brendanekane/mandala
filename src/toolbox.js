@@ -61,12 +61,21 @@ class Toolbox {
     });
   }
 
+  changeSlices() {
+    const sliceMenu = document.querySelector(".slices-dropdown");
+    sliceMenu.addEventListener("change", (e)=> {
+      this.board.slices = parseInt(e.target.value);
+      this.board.angles =  360 / this.board.slices;
+    });
+  }
+
   toolboxEvents() {
     this.clearBoard();
     this.saveBoard();
     this.restoreBoard();
     this.changeColor();
     this.changeLineWeight();
+    this.changeSlices();
   }
 
 }

@@ -522,6 +522,17 @@ function () {
       });
     }
   }, {
+    key: "changeSlices",
+    value: function changeSlices() {
+      var _this6 = this;
+
+      var sliceMenu = document.querySelector(".slices-dropdown");
+      sliceMenu.addEventListener("change", function (e) {
+        _this6.board.slices = parseInt(e.target.value);
+        _this6.board.angles = 360 / _this6.board.slices;
+      });
+    }
+  }, {
     key: "toolboxEvents",
     value: function toolboxEvents() {
       this.clearBoard();
@@ -529,6 +540,7 @@ function () {
       this.restoreBoard();
       this.changeColor();
       this.changeLineWeight();
+      this.changeSlices();
     }
   }]);
 
