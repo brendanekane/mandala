@@ -26,14 +26,13 @@
   background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;
   height: 34px;
   overflow: hidden;
-  width: 60px;
+  width: 100px;
   background-color: #4d93d6;
 }
 
 .line-color-dropdown{
   font-family: "Lucida Console", Monaco, monospace;
   background: transparent;
-  border: none;
   font-size: 14px;
   height: 29px;
   padding: 5px;
@@ -43,11 +42,10 @@
 .line-weight-dropdown {
  font-family: "Lucida Console", Monaco, monospace;
  background: transparent;
- border: none;
  font-size: 16px;
  height: 29px;
  padding: 5px;
- width: 60px;
+ width: 100px;
 }
 
 
@@ -56,13 +54,15 @@
    font-size: 16px;
    height: 34px;
    width: 268px;
+   border: none;
 }
 
 .line-weight-container.blue select {
   border: 1px solid #ccc;
   font-size: 16px;
   height: 34px;
-  width: 80px;
+  width: 90px;
+  border: none;
 }
 
 .rounded {
@@ -72,14 +72,18 @@
 }
 
 
-#clear-button {
+#clear-button, #save-button, #restore-button {
   height: 34px;
   overflow: hidden;
-  width: 60px;
+  width: 70px;
   font-family: "Lucida Console", Monaco, monospace;
   background-color: #4d93d6;
   border: none;
   font-size: 16px;
+}
+
+#restore-button {
+  width: 100px;
 }
 
 .toolbox {
