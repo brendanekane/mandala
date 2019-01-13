@@ -1,4 +1,5 @@
 const MouseEvents = require('./mouse_events.js');
+const Toolbox = require('./toolbox.js');
 
 class DrawingBoard {
   constructor(ctx){
@@ -114,6 +115,7 @@ class DrawingBoard {
 
   init(){
     const mouse = new MouseEvents(this);
+    const toolbox = new Toolbox(this);
 
     this.ctx.clearRect(0,0, this.ctx.canvas.width, this.ctx.canvas.height);
     this.ctx.fillStyle = 'black';
@@ -124,6 +126,7 @@ class DrawingBoard {
     this.ctx.stroke();
     this.ctx.closePath();
     mouse.mouseTrigger();
+    toolbox.toolboxEvents();
   }
 
 }

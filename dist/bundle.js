@@ -101,6 +101,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 var MouseEvents = __webpack_require__(/*! ./mouse_events.js */ "./src/mouse_events.js");
 
+var Toolbox = __webpack_require__(/*! ./toolbox.js */ "./src/toolbox.js");
+
 var DrawingBoard =
 /*#__PURE__*/
 function () {
@@ -246,6 +248,7 @@ function () {
     key: "init",
     value: function init() {
       var mouse = new MouseEvents(this);
+      var toolbox = new Toolbox(this);
       this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
       this.ctx.fillStyle = 'black';
       this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
@@ -255,6 +258,7 @@ function () {
       this.ctx.stroke();
       this.ctx.closePath();
       mouse.mouseTrigger();
+      toolbox.toolboxEvents();
     }
   }]);
 
@@ -282,54 +286,6 @@ document.addEventListener("DOMContentLoaded", function () {
   var ctx = canvas.getContext("2d");
   var board = new DrawingBoard(ctx);
   board.init();
-  var clearBtn = document.querySelector("#clear-button");
-  var saveBtn = document.querySelector("#save-button");
-  var restoreBtn = document.querySelector("#restore-button");
-  clearBtn.addEventListener("click", function (e) {
-    board.init();
-  });
-  saveBtn.addEventListener("click", function (e) {
-    var canvasState = canvas.toDataURL(),
-        data = {
-      mandala: canvasState
-    },
-        string = JSON.stringify(data),
-        file = new Blob([string], {
-      type: 'application/json'
-    });
-    board.stack.push(file); // debugger;
-  });
-  restoreBtn.addEventListener("click", function (e) {
-    var reader = new FileReader();
-    var oldState = board.stack[board.stack.length - 2];
-    if (oldState === undefined) return;
-
-    if (board.stack[0]) {
-      board.stack.pop();
-      reader.readAsText(oldState);
-
-      reader.onload = function () {
-        var data = JSON.parse(reader.result),
-            mandala = new Image();
-        mandala.src = data.mandala;
-
-        mandala.onload = function () {
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-          ctx.drawImage(mandala, 0, 0);
-        };
-      };
-    }
-
-    if (board.stack.length === 0) board.stack.push(oldState);
-  });
-  var colorMenu = document.querySelector(".line-color-dropdown");
-  colorMenu.addEventListener("change", function (e) {
-    board.color = e.target.value;
-  });
-  var weightMenu = document.querySelector(".line-weight-dropdown");
-  weightMenu.addEventListener("change", function (e) {
-    board.weight = e.target.value;
-  });
 });
 
 /***/ }),
@@ -459,6 +415,127 @@ function () {
 }();
 
 module.exports = MouseEvents;
+
+/***/ }),
+
+/***/ "./src/toolbox.js":
+/*!************************!*\
+  !*** ./src/toolbox.js ***!
+  \************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Toolbox =
+/*#__PURE__*/
+function () {
+  function Toolbox(board) {
+    _classCallCheck(this, Toolbox);
+
+    this.board = board;
+  }
+
+  _createClass(Toolbox, [{
+    key: "clearBoard",
+    value: function clearBoard() {
+      var _this = this;
+
+      var clearBtn = document.querySelector("#clear-button");
+      clearBtn.addEventListener("click", function (e) {
+        _this.board.init();
+      });
+    }
+  }, {
+    key: "saveBoard",
+    value: function saveBoard() {
+      var _this2 = this;
+
+      var saveBtn = document.querySelector("#save-button");
+      saveBtn.addEventListener("click", function (e) {
+        var canvasState = _this2.board.ctx.canvas.toDataURL(),
+            data = {
+          mandala: canvasState
+        },
+            string = JSON.stringify(data),
+            file = new Blob([string], {
+          type: 'application/json'
+        });
+
+        _this2.board.stack.push(file);
+      });
+    }
+  }, {
+    key: "restoreBoard",
+    value: function restoreBoard() {
+      var _this3 = this;
+
+      var restoreBtn = document.querySelector("#restore-button");
+      restoreBtn.addEventListener("click", function (e) {
+        var reader = new FileReader();
+        var oldState = _this3.board.stack[_this3.board.stack.length - 2];
+        if (oldState === undefined) return;
+
+        if (_this3.board.stack[0]) {
+          _this3.board.stack.pop();
+
+          reader.readAsText(oldState);
+
+          reader.onload = function () {
+            var data = JSON.parse(reader.result),
+                mandala = new Image();
+            mandala.src = data.mandala;
+
+            mandala.onload = function () {
+              _this3.board.ctx.clearRect(0, 0, _this3.board.ctx.canvas.width, _this3.board.ctx.canvas.height);
+
+              _this3.board.ctx.drawImage(mandala, 0, 0);
+            };
+          };
+        }
+
+        if (_this3.board.stack.length === 0) _this3.board.stack.push(oldState);
+      });
+    }
+  }, {
+    key: "changeColor",
+    value: function changeColor() {
+      var _this4 = this;
+
+      var colorMenu = document.querySelector(".line-color-dropdown");
+      colorMenu.addEventListener("change", function (e) {
+        _this4.board.color = e.target.value;
+      });
+    }
+  }, {
+    key: "changeLineWeight",
+    value: function changeLineWeight() {
+      var _this5 = this;
+
+      var weightMenu = document.querySelector(".line-weight-dropdown");
+      weightMenu.addEventListener("change", function (e) {
+        _this5.board.weight = e.target.value;
+      });
+    }
+  }, {
+    key: "toolboxEvents",
+    value: function toolboxEvents() {
+      this.clearBoard();
+      this.saveBoard();
+      this.restoreBoard();
+      this.changeColor();
+      this.changeLineWeight();
+    }
+  }]);
+
+  return Toolbox;
+}();
+
+module.exports = Toolbox;
 
 /***/ })
 
