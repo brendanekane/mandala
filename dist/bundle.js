@@ -274,29 +274,13 @@ module.exports = DrawingBoard;
 
 var DrawingBoard = __webpack_require__(/*! ./drawing_board.js */ "./src/drawing_board.js");
 
-var MouseEvents = __webpack_require__(/*! ./mouse_events.js */ "./src/mouse_events.js");
-
 document.addEventListener("DOMContentLoaded", function () {
   var canvas = document.querySelector("#mandala-canvas");
   canvas.height = 700;
   canvas.width = 700;
   canvas.style.border = "solid black";
   var ctx = canvas.getContext("2d");
-  var board = new DrawingBoard(ctx); // const mouse = new MouseEvents(board);
-  // const init = () => {
-  //
-  //
-  //   ctx.clearRect(0,0, canvas.width, canvas.height);
-  //   ctx.fillStyle = 'black';
-  //   ctx.fillRect(0,0,canvas.width,canvas.height);
-  //   ctx.beginPath();
-  //   ctx.strokeStyle = "red";
-  //   ctx.arc(board.center.x, board.center.y, board.radius, 0, Math.PI * 2, true);
-  //   ctx.stroke();
-  //   ctx.closePath();
-  //   mouse.mouseTrigger();
-  // };
-
+  var board = new DrawingBoard(ctx);
   board.init();
   var clearBtn = document.querySelector("#clear-button");
   var saveBtn = document.querySelector("#save-button");
