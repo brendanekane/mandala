@@ -91,13 +91,15 @@
   !*** ./src/drawing_board.js ***!
   \******************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var MouseEvents = __webpack_require__(/*! ./mouse_events.js */ "./src/mouse_events.js");
 
 var DrawingBoard =
 /*#__PURE__*/
@@ -240,6 +242,20 @@ function () {
         }
       }
     }
+  }, {
+    key: "init",
+    value: function init() {
+      var mouse = new MouseEvents(this);
+      this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+      this.ctx.fillStyle = 'black';
+      this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+      this.ctx.beginPath();
+      this.ctx.strokeStyle = "red";
+      this.ctx.arc(this.center.x, this.center.y, this.radius, 0, Math.PI * 2, true);
+      this.ctx.stroke();
+      this.ctx.closePath();
+      mouse.mouseTrigger();
+    }
   }]);
 
   return DrawingBoard;
@@ -266,27 +282,27 @@ document.addEventListener("DOMContentLoaded", function () {
   canvas.width = 700;
   canvas.style.border = "solid black";
   var ctx = canvas.getContext("2d");
-  var board = new DrawingBoard(ctx);
-  var mouse = new MouseEvents(board);
+  var board = new DrawingBoard(ctx); // const mouse = new MouseEvents(board);
+  // const init = () => {
+  //
+  //
+  //   ctx.clearRect(0,0, canvas.width, canvas.height);
+  //   ctx.fillStyle = 'black';
+  //   ctx.fillRect(0,0,canvas.width,canvas.height);
+  //   ctx.beginPath();
+  //   ctx.strokeStyle = "red";
+  //   ctx.arc(board.center.x, board.center.y, board.radius, 0, Math.PI * 2, true);
+  //   ctx.stroke();
+  //   ctx.closePath();
+  //   mouse.mouseTrigger();
+  // };
 
-  var init = function init() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = 'black';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.beginPath();
-    ctx.strokeStyle = "red";
-    ctx.arc(board.center.x, board.center.y, board.radius, 0, Math.PI * 2, true);
-    ctx.stroke();
-    ctx.closePath();
-    mouse.mouseTrigger();
-  };
-
-  init();
+  board.init();
   var clearBtn = document.querySelector("#clear-button");
   var saveBtn = document.querySelector("#save-button");
   var restoreBtn = document.querySelector("#restore-button");
   clearBtn.addEventListener("click", function (e) {
-    init();
+    board.init();
   });
   saveBtn.addEventListener("click", function (e) {
     var canvasState = canvas.toDataURL(),

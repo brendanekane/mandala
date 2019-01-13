@@ -8,23 +8,23 @@ document.addEventListener("DOMContentLoaded", () => {
   canvas.style.border = "solid black";
   const ctx = canvas.getContext("2d");
   const board = new DrawingBoard(ctx);
-  const mouse = new MouseEvents(board);
+  // const mouse = new MouseEvents(board);
 
-  const init = () => {
+  // const init = () => {
+  //
+  //
+  //   ctx.clearRect(0,0, canvas.width, canvas.height);
+  //   ctx.fillStyle = 'black';
+  //   ctx.fillRect(0,0,canvas.width,canvas.height);
+  //   ctx.beginPath();
+  //   ctx.strokeStyle = "red";
+  //   ctx.arc(board.center.x, board.center.y, board.radius, 0, Math.PI * 2, true);
+  //   ctx.stroke();
+  //   ctx.closePath();
+  //   mouse.mouseTrigger();
+  // };
 
-
-    ctx.clearRect(0,0, canvas.width, canvas.height);
-    ctx.fillStyle = 'black';
-    ctx.fillRect(0,0,canvas.width,canvas.height);
-    ctx.beginPath();
-    ctx.strokeStyle = "red";
-    ctx.arc(board.center.x, board.center.y, board.radius, 0, Math.PI * 2, true);
-    ctx.stroke();
-    ctx.closePath();
-    mouse.mouseTrigger();
-  };
-
-  init();
+  board.init();
 
 
 
@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const saveBtn = document.querySelector("#save-button");
   const restoreBtn = document.querySelector("#restore-button");
   clearBtn.addEventListener("click", (e) => {
-    init();
+    board.init();
   });
   saveBtn.addEventListener("click", (e) => {
     const canvasState = canvas.toDataURL(),

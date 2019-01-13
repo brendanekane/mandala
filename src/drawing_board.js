@@ -1,3 +1,5 @@
+const MouseEvents = require('./mouse_events.js');
+
 class DrawingBoard {
   constructor(ctx){
     this.ctx = ctx;
@@ -108,6 +110,20 @@ class DrawingBoard {
             this.draw();
         }
     }
+  }
+
+  init(){
+    const mouse = new MouseEvents(this);
+
+    this.ctx.clearRect(0,0, this.ctx.canvas.width, this.ctx.canvas.height);
+    this.ctx.fillStyle = 'black';
+    this.ctx.fillRect(0,0,this.ctx.canvas.width,this.ctx.canvas.height);
+    this.ctx.beginPath();
+    this.ctx.strokeStyle = "red";
+    this.ctx.arc(this.center.x, this.center.y, this.radius, 0, Math.PI * 2, true);
+    this.ctx.stroke();
+    this.ctx.closePath();
+    mouse.mouseTrigger();
   }
 
 }
