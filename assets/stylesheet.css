@@ -14,16 +14,24 @@
   justify-content: center;
 }
 
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: '';
+  text-align-last: center;
+}
+
 .line-color-container{
-  background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;
+  background: url("down_arrow.png") no-repeat 96% 0;
   height: 34px;
   overflow: hidden;
-  width: 240px;
+  width: 195px;
   background-color: #4d93d6;
 }
 
-.line-weight-container {
-  background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;
+.line-weight-container, .slices-container {
+  background: url("down_arrow.png") no-repeat 96% 0;
   height: 34px;
   overflow: hidden;
   width: 100px;
@@ -36,28 +44,27 @@
   font-size: 14px;
   height: 29px;
   padding: 5px;
-  width: 268px;
 }
 
-.line-weight-dropdown {
- font-family: "Lucida Console", Monaco, monospace;
- background: transparent;
- font-size: 16px;
- height: 29px;
- padding: 5px;
- width: 100px;
+.line-weight-dropdown, .slices-dropdown {
+  font-family: "Lucida Console", Monaco, monospace;
+  background: transparent;
+  font-size: 16px;
+  height: 29px;
+  padding: 5px;
+  width: 100px;
 }
 
 
 .line-color-container.blue select {
-   border: 1px solid #ccc;
-   font-size: 16px;
-   height: 34px;
-   width: 268px;
-   border: none;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  height: 34px;
+  width: 180px;
+  border: none;
 }
 
-.line-weight-container.blue select {
+.line-weight-container.blue select, .slices-container.blue select {
   border: 1px solid #ccc;
   font-size: 16px;
   height: 34px;
@@ -87,13 +94,18 @@
 }
 
 .toolbox {
-  display: flex;
-  justify-content: center;
-  width: 50vw;
+  display: grid;
+  grid-template-rows: 50% 50%;
 }
 
 .toolbox > * {
   margin: 20px;
+}
+
+.toolbox-top-row, .toolbox-bottom-row {
+  width: 50vw;
+  display: flex;
+  justify-content: space-evenly;
 }
 /*** Styles added to fix the issue with zoom in on iphone ***/
 /* iPhone < 5: */
