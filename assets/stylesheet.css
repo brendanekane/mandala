@@ -4,6 +4,19 @@
   align-items: center;
 }
 
+
+
+.canvas-container {
+  background: #fff;
+  border: 1px solid #aaa;
+  border-radius: 400px;
+  height: 700px;
+  margin: 20px 20px;
+  overflow: hidden;
+  width: 700px;
+}
+
+
 .header {
   color: white;
   font-size: 50px;
@@ -70,7 +83,7 @@ select {
   height: 34px;
   width: 90px;
   border: none;
-  
+
 }
 
 .rounded {
@@ -97,6 +110,7 @@ select {
 .toolbox {
   display: grid;
   grid-template-rows: 50% 50%;
+  background-color: #483d8b;
 }
 
 .toolbox > * {

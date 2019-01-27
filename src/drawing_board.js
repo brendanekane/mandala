@@ -121,7 +121,6 @@ class DrawingBoard {
     this.ctx.fillStyle = 'black';
     this.ctx.fillRect(0,0,this.ctx.canvas.width,this.ctx.canvas.height);
     this.ctx.beginPath();
-    this.ctx.strokeStyle = "red";
     this.ctx.arc(this.center.x, this.center.y, this.radius, 0, Math.PI * 2, true);
     this.ctx.stroke();
     this.ctx.closePath();
